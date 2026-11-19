@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Scoo logo v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#fff;font-family:Inter,sans-serif}
+.wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:40px;width:1360px;box-sizing:border-box}
+.card{border:2px solid #111;border-radius:24px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:14px;min-height:300px;justify-content:center}
+.card.dark{background:#111;border-color:#111}
+.card h3{margin:0;font-size:14px;font-weight:600;color:#666;align-self:flex-start}.card.dark h3{color:#aaa}
+.lock{display:flex;align-items:center;gap:14px}
+.word{font:500 60px 'Space Grotesk';letter-spacing:-1px;color:#111}
+.tile{width:150px;height:150px;border-radius:34px;display:grid;place-items:center}
+.row{display:flex;gap:26px;align-items:flex-end}.fav{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:#666}
+</style></head><body><div class="wrap" id="w"></div>
+<script>
+// faithful to the sketch: wide lenses, a bridge line running into both lenses,
+// one long stretched "s" crossing it as the nose, a small lopsided smile
+const M=({ink='#111',smile='#FF6B4A',sw=5,long=false}={})=>`<svg viewBox="0 0 320 214" role="img" aria-label="Scoo glasses face"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="${sw}">
+<path stroke="${ink}" d="M38 94 C38 64 62 52 92 54 C120 56 134 72 132 96 C130 120 108 134 82 132 C56 130 38 120 38 94 Z"/>
+<path stroke="${ink}" d="M188 96 C186 72 200 56 228 54 C258 52 282 64 282 94 C282 120 264 134 236 132 C208 130 190 120 188 96 Z"/>
+<path stroke="${ink}" d="${long?'M112 96 L252 96':'M131 96 L189 96'}"/>
+<path stroke="${ink}" transform="skewX(-12) translate(20 0)" d="M178 60 C172 49 148 48 144 62 C140 76 158 84 163 94 C169 105 182 118 176 132 C170 146 144 148 138 134"/>
+<path stroke="${smile}" d="M183.3 166.0 A30 19 0 1 1 142.8 152.4"/></g></svg>`;
+const cards=[
+ ['Proper s nose, proper c smile · coral on black',`<div style="width:300px">${M({ink:'#FF6B4A',smile:'#FF6B4A'})}</div>`,'dark'],
+ ['Ink lines, coral c',`<div style="width:300px">${M()}</div>`],
+ ['Bridge extending into the lenses, like your sketch',`<div style="width:300px">${M({long:true})}</div>`],
+ ['With a lighter wordmark',`<div class="lock"><div style="width:130px">${M({sw:7})}</div><span class="word" style="font-weight:400">scoo</span></div>`],
+ ['App icon + small sizes',`<div class="row"><div class="tile" style="background:#FF6B4A"><div style="width:122px">${M({ink:'#fff',smile:'#111',sw:9})}</div></div>${[48,32].map(s=>`<div class="fav"><div style="width:${s}px">${M({sw:s<=32?16:11})}</div>${s}px</div>`).join('')}</div>`],
+ ['Large, coral on white',`<div style="width:300px">${M({ink:'#FF6B4A',smile:'#FF6B4A'})}</div>`],
+];
+document.getElementById('w').innerHTML=cards.map(([t,h,d])=>`<div class="card ${d||''}"><h3>${t}</h3>${h}</div>`).join('');
+</script></body></html>

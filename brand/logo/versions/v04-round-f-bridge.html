@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Scoo logo v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#fff;font-family:Inter,sans-serif}
+.wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:40px;width:1360px;box-sizing:border-box}
+.card{border:2px solid #111;border-radius:24px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:14px;min-height:300px;justify-content:center}
+.card.dark{background:#111;border-color:#111}
+.card h3{margin:0;font-size:14px;font-weight:600;color:#666;align-self:flex-start}.card.dark h3{color:#aaa}
+.lock{display:flex;align-items:center;gap:14px}
+.word{font:500 60px 'Space Grotesk';letter-spacing:-1px;color:#111}
+.tile{width:150px;height:150px;border-radius:34px;display:grid;place-items:center}
+.row{display:flex;gap:26px;align-items:flex-end}.fav{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:#666}
+</style></head><body><div class="wrap" id="w"></div>
+<script>
+// faithful to the sketch: wide lenses, a bridge line running into both lenses,
+// one long stretched "s" crossing it as the nose, a small lopsided smile
+const M=({ink='#111',smile='#FF6B4A',sw=5}={})=>`<svg viewBox="0 0 320 214" role="img" aria-label="Scoo glasses face"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="${sw}">
+<circle cx="88" cy="96" r="50" stroke="${ink}"/><circle cx="232" cy="96" r="50" stroke="${ink}"/>
+<path stroke="${ink}" d="M112 98 L252 98"/>
+<path stroke="${ink}" d="M206 44 C188 50 178 66 172 82 C164 104 152 122 140 132 C130 140 120 142 112 144"/>
+<path stroke="${smile}" d="M167.5 160.4 A15 15 0 1 1 144.5 160.4"/></g></svg>`;
+const cards=[
+ ['Round lenses, ƒ bridge, a true lowercase c facing up',`<div style="width:300px">${M()}</div>`],
+ ['All coral',`<div style="width:300px">${M({ink:'#FF6B4A'})}</div>`],
+ ['On black',`<div style="width:300px">${M({ink:'#f3f3f3',smile:'#FF7A5C'})}</div>`,'dark'],
+ ['With the wordmark',`<div class="lock"><div style="width:130px">${M({sw:7})}</div><span class="word" style="font-weight:400">scoo</span></div>`],
+ ['App icon + small sizes',`<div class="row"><div class="tile" style="background:#FF6B4A"><div style="width:122px">${M({ink:'#fff',smile:'#111',sw:9})}</div></div>${[48,32].map(s=>`<div class="fav"><div style="width:${s}px">${M({sw:s<=32?16:11})}</div>${s}px</div>`).join('')}</div>`],
+ ['Large',`<div style="width:330px">${M({sw:4})}</div>`],
+];
+document.getElementById('w').innerHTML=cards.map(([t,h,d])=>`<div class="card ${d||''}"><h3>${t}</h3>${h}</div>`).join('');
+</script></body></html>
