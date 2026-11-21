@@ -35,24 +35,8 @@ and a rendered `.png`, so an earlier idea can be picked back up:
 | v07–v09 | round lenses, hook right, smile curling left; then short bridge; then bigger smile |
 | v10 wide gap, full s | **current** — wider lens spacing so the s can curve fully |
 
-`render.js` screenshots a sheet: `node render.js <sheet.html> <out.png>`
-(needs Playwright).
+## Homepage stills
 
-## Homepage prototype
-
-`homepage/index.html` is a single screen with no scroll: the logo, the rotating
-headline ("Get an expert in 60 seconds"), a search box with example
-placeholders, a line-art street, and pros who drift down and land on the
-sidewalk. Pressing the arrow runs the agent conversation (ZIP, one category
-question, phone number with call consent, then the match — or, with `?busy`,
-the "all pros are busy, call back within the hour" path). Add `?demo` to watch
-the flow play itself, and `?fast` to speed up the falling pros.
-
-`gen.py` draws the street and writes `index.html`; `post.py` adds the pros,
-the conversation and the logo. Rebuild from this folder:
-
-```bash
-python3 gen.py && python3 post.py
-```
-
-Names, distances and phone numbers in the demo flow are placeholders.
+`homepage/` keeps screenshots of the early homepage prototype (the street, the
+falling pros and the agent conversation). The live homepage is
+`src/routes/+page.svelte`.
