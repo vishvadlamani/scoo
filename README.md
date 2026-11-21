@@ -26,7 +26,10 @@ npm run deploy                                                    # build, then 
 | `src/lib/brand/` | the logo |
 | `src/app.css` | colour tokens (light and dark) and the base styles every page shares |
 | `static/` | favicon and logo files at fixed URLs |
-| `schema.sql` | the tables: `requests`, `pros`, `operators` |
+| `schema.sql` | the tables: `requests`, `pros`, `operators`, `exchange_members` (a fresh database runs it whole) |
+| `migrations/` | changes to apply to an existing database, in order |
+| `src/lib/profiles/`, `src/lib/server/profiles.ts` | public pro profiles (`/p/<slug>`) and exchange pages (`/x/<slug>`) |
+| `src/lib/server/examples.ts` | the example exchange and pros: invented, labelled, never indexed |
 | `brand/` | logo history and exports, not shipped |
 | `tools/` | build scripts, TypeScript, run by Node directly |
 
@@ -74,6 +77,23 @@ is an area of its own. To rebuild after changing the metros:
 curl -LO https://download.geonames.org/export/zip/US.zip && unzip US.zip US.txt
 npm run geo -- US.txt
 ```
+
+## Public pages and search
+
+A pro profile (`/p/<slug>`) or exchange page (`/x/<slug>`) is public only once `published_at` is
+set; before that it answers 404. A pro gets one only if they ticked the profile box on the sign-up
+form (`profile_ok`) and Scoo has checked the details with them. To publish:
+
+```sql
+UPDATE pros SET published_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE slug = '…';
+UPDATE operators SET published_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), tagline = '…', rules = '…' WHERE slug = '…';
+INSERT INTO exchange_members (operator_id, pro_id) VALUES (…, …);
+```
+
+Published pages are listed in `/sitemap.xml` and carry schema.org data. `/x/example` and
+`/p/example-*` are the examples: invented names and numbers, labelled on screen, `noindex`, left out
+of the sitemap, and their slugs are reserved. Track-record numbers on real profiles stay empty until
+they can be counted from real calls.
 
 ## Rules the pages keep
 

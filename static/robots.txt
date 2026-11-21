@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /api/
+Disallow: /app
+Disallow: /r/
+Disallow: /pro/
+
+Sitemap: https://scoo.app/sitemap.xml

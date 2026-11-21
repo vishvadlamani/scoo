@@ -19,7 +19,7 @@
 	// The strip under the comparison: every trade but the catch-all, twice over so it loops seamlessly.
 	const STRIP = TRADES.filter((t) => t !== 'Other');
 
-	let form = $state({ business: '', trade: TRADES[0] as Trade, zip: '', phone: '', email: '', consent: false });
+	let form = $state({ business: '', trade: TRADES[0] as Trade, zip: '', phone: '', email: '', consent: false, profile: false });
 	let ref: string | null = null;
 	let tsNeeded = $state(false);
 	let tsToken = $state<string | null>(null);
@@ -68,6 +68,8 @@
 			phone: form.phone,
 			email: form.email.trim() || null,
 			consent: form.consent,
+			// optional: they want a public profile page; Scoo publishes it after a check
+			profile: form.profile,
 			// the exact words they agreed to, as shown, so the record can prove the opt-in
 			consentText: consentSpan?.textContent ?? '',
 			ref,
@@ -223,6 +225,11 @@
 								>Email<input bind:value={form.email} type="email" autocomplete="email" maxlength="160" placeholder="Optional" /></label
 							>
 						</div>
+						<label class="consent opt"
+							><input type="checkbox" bind:checked={form.profile} /><span
+								>Also give my business a free public profile on Scoo, like <a href="/p/example-rivera-plumbing" target="_blank" rel="noopener">this example</a>. We'll check the details with you before it goes live.</span
+							></label
+						>
 						<label class="consent"
 							><input type="checkbox" bind:checked={form.consent} required /><span bind:this={consentSpan}
 								>I agree to Scoo's <a href="/terms" target="_blank" rel="noopener">terms</a>, and that Scoo may call or text me about joining and connect customer calls to this number. Calls may be recorded. Reply STOP to opt out.</span
@@ -297,6 +304,7 @@
 				<div class="tx">
 					<h3>A profile that earns trust</h3>
 					<p>Jobs won and calls answered, counted by Scoo, not self-reported.</p>
+					<a class="more" href="/p/example-rivera-plumbing">See an example profile →</a>
 				</div>
 				<div class="ui prof" aria-label="Example pro profile">
 					<div class="ph">
@@ -317,7 +325,7 @@
 					<p>Networks of pros who pass work to each other, each with its own page and rules.</p>
 				</div>
 				<div class="chips">
-					<span class="chip">DFW Home Pros</span><span class="chip">North Texas Roofers</span><span class="chip">Uptown Trades</span><a
+					<a class="chip" href="/x/example">DFW Home Pros</a><span class="chip">North Texas Roofers</span><span class="chip">Uptown Trades</span><a
 						class="chip add"
 						href="/exchanges/start">+ Start your own</a
 					>
@@ -778,6 +786,17 @@
 	}
 	.consent a {
 		color: inherit;
+	}
+	.consent.opt {
+		color: var(--ink);
+		font-size: 14px;
+	}
+	.more {
+		display: inline-block;
+		margin-top: 8px;
+		color: var(--ink);
+		font-weight: 600;
+		font-size: 14px;
 	}
 	.primary {
 		min-height: 54px;

@@ -31,6 +31,7 @@
 <h2>Who we share it with</h2>
 <ul>
 <li><b>Pros:</b> once Scoo is live in your area, the pro matched to your request receives your request and the contact details needed to reach you.</li>
+<li><b>The public, if you are a pro and ask for it:</b> a public profile shows your business name, trade, town, service area and the details you approve. It goes live only after we check it with you, and you can ask us to take it down at any time.</li>
 <li><b>Service providers</b> that run Scoo for us, such as hosting and security (Cloudflare), our database, text and email delivery, and AI request sorting. They may use the information only to provide their service to us.</li>
 <li><b>Legal reasons:</b> when the law requires it, or to protect people, Scoo or our users.</li>
 <li><b>Business changes:</b> if Scoo is merged or sold, your information may transfer, still covered by this policy.</li>

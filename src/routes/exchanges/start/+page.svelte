@@ -303,7 +303,7 @@
 
 	<section class="band" aria-labelledby="ex-title">
 		<h2 id="ex-title">What your exchange looks like</h2>
-		<p>Your page, your rules, your members. This is an example, not a real exchange.</p>
+		<p>Your page, your rules, your members. This is an example, not a real exchange. <a class="full" href="/x/example">See the full example page →</a></p>
 		<div class="ex" aria-label="Example exchange page">
 			<span class="tag">EXAMPLE</span>
 			<div class="cover"></div>
@@ -820,6 +820,11 @@
 		color: var(--muted);
 		font-size: 17px;
 		max-width: 620px;
+	}
+	.full {
+		color: var(--ink);
+		font-weight: 600;
+		white-space: nowrap;
 	}
 	.steps {
 		list-style: none;

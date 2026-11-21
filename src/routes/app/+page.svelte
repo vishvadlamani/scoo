@@ -94,6 +94,8 @@
 
 <svelte:head>
 	<title>Scoo · Your area</title>
+	<!-- personal to whoever is signed in: nothing here for search engines -->
+	<meta name="robots" content="noindex" />
 </svelte:head>
 
 <AppMap {data} onready={start} />

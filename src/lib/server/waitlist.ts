@@ -8,6 +8,8 @@ import { json } from '@sveltejs/kit';
 import { AREAS, area, coordsForZip } from './geo/geo.ts';
 import { openStore, type Store } from './store.ts';
 import { TRADES } from '#lib/trades.ts';
+import { freeProSlug, slugify } from './profiles.ts';
+import { isExampleSlug } from './examples.ts';
 
 /** Sign-ups a city needs before Scoo opens there. */
 export const GOAL = 1000;
@@ -217,6 +219,9 @@ export async function createPro(request: Request, env: Env) {
 	const email = b.email ? str(b.email).trim().slice(0, 160) : null;
 	const consentText = str(b.consentText).trim().slice(0, 600);
 	const ref = cleanRef(b.ref);
+	// Optional, unticked by default: a public profile at scoo.app/p/<slug>. Ticking it asks for one;
+	// Scoo publishes it after a check, so the form alone never puts a business on Google.
+	const wantsProfile = b.profile === true;
 
 	if (business.length < 2) return fail('Add your business name');
 	if (!TRADE_SET.has(trade)) return fail('Pick your trade');
@@ -233,17 +238,22 @@ export async function createPro(request: Request, env: Env) {
 		trade,
 		a.key
 	]);
+	if (saved && wantsProfile) {
+		await db.run('UPDATE pros SET profile_ok = 1 WHERE id = ?', [saved.id]);
+	}
 	if (!saved) {
 		// A pro can be invited by a customer (requests.code) or by another pro (pros.code).
+		// Reserved now so the address can be shown and kept; the page stays dark until published.
+		const slug = await freeProSlug(db, slugify(business, a.town));
 		const known =
 			ref &&
 			((await db.first('SELECT 1 AS ok FROM requests WHERE code = ?', [ref])) ||
 				(await db.first('SELECT 1 AS ok FROM pros WHERE code = ?', [ref])));
 		saved = await insertWithCode(
 			db,
-			`INSERT INTO pros (business, trade, zip, city_key, city_name, phone, email, consent_text, consent_at, code, referred_by, user_agent)
-			 VALUES (?, ?, ?, ?, ?, ?, ?, ?, strftime('%Y-%m-%dT%H:%M:%fZ','now'), ?, ?, ?)`,
-			(code) => [business, trade, zip, a.key, a.name, phone, email, consentText, code, known ? ref : null, userAgent(request)]
+			`INSERT INTO pros (business, trade, zip, city_key, city_name, phone, email, consent_text, consent_at, code, referred_by, user_agent, profile_ok, slug)
+			 VALUES (?, ?, ?, ?, ?, ?, ?, ?, strftime('%Y-%m-%dT%H:%M:%fZ','now'), ?, ?, ?, ?, ?)`,
+			(code) => [business, trade, zip, a.key, a.name, phone, email, consentText, code, known ? ref : null, userAgent(request), wantsProfile ? 1 : 0, slug]
 		);
 		if (!saved) return fail('Could not save your sign-up', 500);
 	}
@@ -253,7 +263,7 @@ export async function createPro(request: Request, env: Env) {
 
 // Exchange names: the slug in scoo.app/x/<slug>. Reserved words keep paths and the brand safe.
 const RESERVED = new Set(
-	'app api pros pro request terms privacy exchanges exchange x r admin scoo www help support login signup settings about blog jobs careers press legal security status'.split(
+	'app api pros pro p request terms privacy exchanges exchange x r admin scoo example sitemap robots www help support login signup settings about blog jobs careers press legal security status'.split(
 		' '
 	)
 );
@@ -261,7 +271,7 @@ const SLUG = /^[a-z0-9](?:[a-z0-9-]{1,30}[a-z0-9])$/;
 
 async function nameCheck(db: Store, s: string): Promise<{ available: true } | { available: false; reason: string }> {
 	if (!SLUG.test(s)) return { available: false, reason: 'Use 3 to 32 lowercase letters, numbers and dashes.' };
-	if (RESERVED.has(s)) return { available: false, reason: 'That name is reserved. Try another.' };
+	if (RESERVED.has(s) || isExampleSlug(s)) return { available: false, reason: 'That name is reserved. Try another.' };
 	const taken = await db.first('SELECT 1 AS t FROM operators WHERE slug = ?', [s]);
 	return taken ? { available: false, reason: 'That name is taken. Try another.' } : { available: true };
 }
