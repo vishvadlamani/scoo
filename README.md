@@ -40,6 +40,10 @@ the Worker costs nothing that matters, and the adapter's Worker is otherwise unc
 deploy from somewhere without that proxy, drop the embed step from `build` and the normal static
 assets work as SvelteKit intends.
 
+The same step writes a small front door (`entry.js`) ahead of SvelteKit that sends
+`www.scoo.app` to `scoo.app`: prerendered pages are answered before SvelteKit's hooks run, so a
+redirect that must cover every path cannot live in `hooks.server.ts`.
+
 `wrangler.jsonc` holds every binding and route, so a plain deploy never loses configuration that
 only lived in the dashboard. Secrets are set with `wrangler secret put` and never committed.
 

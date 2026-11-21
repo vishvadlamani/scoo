@@ -2,7 +2,7 @@
 	"extends": "$app/tsconfig",
 	"compilerOptions": {
 		"strict": true,
-		"types": ["@cloudflare/workers-types"]
+		"types": ["$app/types", "@cloudflare/workers-types"]
 	},
 	"include": ["src", "tools", "vite.config.ts"]
 }

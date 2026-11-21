@@ -2,6 +2,7 @@
      the street. Pre-launch, so it ends on the city waitlist and referrals rather than a call.
      need → ZIP → one question → the area lookup, which becomes the contact form → done. -->
 <script lang="ts">
+	import { dev } from '$app/env';
 	import { onMount, tick } from 'svelte';
 	import { page } from '$app/state';
 	import Mark from '#lib/brand/Mark.svelte';
@@ -206,7 +207,9 @@
 			if (step === 1) show({ step: 'zip' });
 			if (step >= 2) zipForm?.requestSubmit();
 			if (step >= 3) callScreen();
-			if (step >= 4) {
+			// Step 4 really saves a request, so only a dev server takes it: on scoo.app a shared
+			// screenshot link must never write a sign-up.
+			if (step >= 4 && dev) {
 				await tick();
 				notify?.demoSubmit('(214) 555-0142');
 			}
@@ -348,22 +351,23 @@
 	}
 
 	/* What every step shares, including what its components render: global under .rq so it
-	   reaches into them and no further. */
-	.rq :global(h1) {
+	   reaches into them and no further. :where keeps these as weak as the plain selectors they
+	   were, so a step's own rules (the smaller map, the smaller lookup title) still win. */
+	:global(:where(.rq) h1) {
 		margin: 4px 0 0;
 		font-weight: 300;
 		font-size: clamp(32px, 5vw, 46px);
 		letter-spacing: -0.03em;
 		line-height: 1.05;
 	}
-	.rq :global(.lead) {
+	:global(:where(.rq) .lead) {
 		margin: 0;
 		color: var(--muted);
 		font-size: 17px;
 		line-height: 1.5;
 		max-width: 440px;
 	}
-	.rq :global(.primary) {
+	:global(:where(.rq) .primary) {
 		min-height: 54px;
 		border: 0;
 		border-radius: 999px;
@@ -372,140 +376,140 @@
 		font: 600 17px 'Hanken Grotesk', sans-serif;
 		cursor: pointer;
 	}
-	.rq :global(.primary:disabled) {
+	:global(:where(.rq) .primary:disabled) {
 		opacity: 0.4;
 		cursor: not-allowed;
 	}
-	.rq :global(.fine) {
+	:global(:where(.rq) .fine) {
 		margin: 0;
 		font-size: 12px;
 		color: var(--muted);
 		text-align: left;
 		width: 100%;
 	}
-	.rq :global(.art) {
+	:global(:where(.rq) .art) {
 		width: min(340px, 86vw);
 	}
 
 	/* The line-art: ink strokes with coral and soft fills, drawn into each step with {@html}. The
 	   winged pros on the done screen bring their own classes (wing, wingp, skin…), styled here. */
-	.rq :global(.ill) {
+	:global(:where(.rq) .ill) {
 		width: 100%;
 		height: auto;
 		overflow: visible;
 	}
-	.rq :global(.ill *) {
+	:global(:where(.rq) .ill *) {
 		fill: none;
 		stroke: var(--ink);
 		stroke-width: 2.2;
 		stroke-linecap: round;
 		stroke-linejoin: round;
 	}
-	.rq :global(.ill .soft),
-	.rq :global(.ill .wingp) {
+	:global(:where(.rq) .ill .soft),
+	:global(:where(.rq) .ill .wingp) {
 		fill: var(--soft);
 	}
-	.rq :global(.ill .accent) {
+	:global(:where(.rq) .ill .accent) {
 		fill: var(--accent);
 		stroke: var(--ink);
 	}
-	.rq :global(.ill .paper),
-	.rq :global(.ill .fillbg),
-	.rq :global(.ill .skin),
-	.rq :global(.ill .mouth) {
+	:global(:where(.rq) .ill .paper),
+	:global(:where(.rq) .ill .fillbg),
+	:global(:where(.rq) .ill .skin),
+	:global(:where(.rq) .ill .mouth) {
 		fill: var(--bg);
 	}
-	.rq :global(.ill .lit) {
+	:global(:where(.rq) .ill .lit) {
 		fill: var(--glow);
 	}
-	.rq :global(.ill .yellow) {
+	:global(:where(.rq) .ill .yellow) {
 		fill: #ffc93d;
 	}
-	.rq :global(.ill .blue) {
+	:global(:where(.rq) .ill .blue) {
 		fill: #7fb2ff;
 	}
-	.rq :global(.ill .shades) {
+	:global(:where(.rq) .ill .shades) {
 		fill: var(--ink);
 	}
-	.rq :global(.ill .eyes) {
+	:global(:where(.rq) .ill .eyes) {
 		stroke-width: 4;
 	}
-	.rq :global(.ill .cross) {
+	:global(:where(.rq) .ill .cross) {
 		stroke: var(--accent);
 		stroke-width: 3;
 	}
-	.rq :global(.ill .band) {
+	:global(:where(.rq) .ill .band) {
 		stroke: var(--accent);
 		stroke-width: 5;
 	}
-	.rq :global(.ill .thick) {
+	:global(:where(.rq) .ill .thick) {
 		stroke-width: 5;
 	}
-	.rq :global(.ill .dash) {
+	:global(:where(.rq) .ill .dash) {
 		stroke-dasharray: 14 14;
 	}
-	.rq :global(.ill .shadow) {
+	:global(:where(.rq) .ill .shadow) {
 		fill: var(--line);
 		stroke: none;
 		animation: rq-shadow 0.9s ease-out both;
 	}
-	.rq :global(.ill .glow) {
+	:global(:where(.rq) .ill .glow) {
 		fill: var(--glow);
 	}
-	.rq :global(.ill .accent-line),
-	.rq :global(.ill .paper-line),
-	.rq :global(.ill .spark),
-	.rq :global(.ill .rain) {
+	:global(:where(.rq) .ill .accent-line),
+	:global(:where(.rq) .ill .paper-line),
+	:global(:where(.rq) .ill .spark),
+	:global(:where(.rq) .ill .rain) {
 		stroke: var(--accent);
 	}
-	.rq :global(.ill .water) {
+	:global(:where(.rq) .ill .water) {
 		stroke: #7fb2ff;
 		stroke-width: 3;
 	}
-	.rq :global(.ill .drop) {
+	:global(:where(.rq) .ill .drop) {
 		fill: #9ec9ff;
 		animation: rq-drip 1.4s ease-in infinite;
 		animation-delay: calc(var(--i, 0) * 0.7s);
 	}
-	.rq :global(.ill text) {
+	:global(:where(.rq) .ill text) {
 		stroke: none;
 		fill: var(--ink);
 		font: 600 14px 'Hanken Grotesk', sans-serif;
 	}
-	.rq :global(.ill .signtxt) {
+	:global(:where(.rq) .ill .signtxt) {
 		stroke: none;
 		fill: var(--accent);
 		font: 700 12px 'Hanken Grotesk', sans-serif;
 	}
-	.rq :global(.ill .wing) {
+	:global(:where(.rq) .ill .wing) {
 		transform-box: fill-box;
 		animation: rq-flap 0.3s ease-in-out infinite alternate;
 	}
-	.rq :global(.ill .wl) {
+	:global(:where(.rq) .ill .wl) {
 		transform-origin: 100% 50%;
 	}
-	.rq :global(.ill .wr) {
+	:global(:where(.rq) .ill .wr) {
 		transform-origin: 0% 50%;
 		animation-name: rq-flapr;
 	}
-	.rq :global(.ill .pop) {
+	:global(:where(.rq) .ill .pop) {
 		animation: rq-pop 0.5s cubic-bezier(0.3, 0.8, 0.3, 1.3) both;
 		animation-delay: calc(0.25s + var(--i) * 0.45s);
 	}
-	.rq :global(.ill .dot) {
+	:global(:where(.rq) .ill .dot) {
 		fill: var(--ink);
 		stroke: none;
 		animation: rq-blink 1s infinite;
 		animation-delay: calc(var(--i, 0) * 0.15s);
 	}
-	.rq :global(.ill .pin) {
+	:global(:where(.rq) .ill .pin) {
 		animation: rq-pin 0.9s cubic-bezier(0.3, 0.8, 0.3, 1.4) both;
 	}
-	.rq :global(.ill .row) {
+	:global(:where(.rq) .ill .row) {
 		animation: rq-pop 0.4s cubic-bezier(0.3, 0.8, 0.3, 1.3) both;
 		animation-delay: calc(0.2s + var(--i) * 0.35s);
 	}
-	.rq :global(.ill .tick) {
+	:global(:where(.rq) .ill .tick) {
 		stroke: var(--accent);
 		stroke-width: 3;
 		stroke-dasharray: 24;
@@ -513,20 +517,20 @@
 		animation: rq-tick 0.4s ease-out forwards;
 		animation-delay: calc(1.2s + var(--i, 0) * 0.5s);
 	}
-	.rq :global(.ill .row:nth-of-type(2) .tick) {
+	:global(:where(.rq) .ill .row:nth-of-type(2) .tick) {
 		animation-delay: 1.7s;
 	}
-	.rq :global(.ill .pencil) {
+	:global(:where(.rq) .ill .pencil) {
 		animation: rq-write 1.6s ease-in-out infinite;
 		transform-box: fill-box;
 		transform-origin: 0 100%;
 	}
-	.rq :global(.ill .wave) {
+	:global(:where(.rq) .ill .wave) {
 		animation: rq-hop 1.6s ease-in-out infinite;
 		transform-box: fill-box;
 		transform-origin: 50% 100%;
 	}
-	.rq :global(.ill .bubble-s) {
+	:global(:where(.rq) .ill .bubble-s) {
 		animation: rq-pop 0.5s 0.5s cubic-bezier(0.3, 0.8, 0.3, 1.3) both;
 	}
 
