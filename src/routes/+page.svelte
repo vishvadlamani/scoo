@@ -315,7 +315,6 @@
 		vertical-align: bottom;
 		overflow: hidden;
 		color: var(--accent);
-		font-weight: 400;
 		transition: width 0.45s cubic-bezier(0.3, 0.8, 0.3, 1);
 		white-space: nowrap;
 		padding: 0 0.14em 0.08em 0;
@@ -340,12 +339,12 @@
 	}
 
 	.ask {
-		/* sized as the original: 640px of field plus its padding and border */
-		box-sizing: content-box;
+		/* 640px of field plus its padding and border, as before, but never wider than the screen:
+		   the old page let it overhang the right edge on phones */
 		display: flex;
 		align-items: center;
 		gap: 6px;
-		width: min(640px, 100%);
+		width: min(671px, 100%);
 		background: var(--bg);
 		border: 1.5px solid var(--ink);
 		border-radius: 999px;
