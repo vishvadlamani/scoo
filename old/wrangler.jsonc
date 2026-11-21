@@ -1,0 +1,15 @@
+{
+  "name": "scoo-site",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-01",
+  "account_id": "b7b8a3a728aac55c2d6c040c73b6b7ff",
+  "rules": [{ "type": "Text", "globs": ["**/*.html", "**/*.svg"], "fallthrough": true }],
+  "d1_databases": [
+    { "binding": "DB", "database_name": "scoo-waitlist", "database_id": "fcc9e79b-a847-4093-8e7d-bc6f3f9948bf" }
+  ],
+  "routes": [
+    { "pattern": "scoo.app", "custom_domain": true },
+    { "pattern": "www.scoo.app", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}

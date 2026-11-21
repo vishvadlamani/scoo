@@ -1,0 +1,33 @@
+{
+	"name": "scoo",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"imports": {
+		"#lib": "./src/lib/index.ts",
+		"#lib/*": "./src/lib/*"
+	},
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build && node tools/embed-assets.ts",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"geo": "node tools/geo-build.ts",
+		"deploy": "npm run build && wrangler deploy"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^5.20261120.1",
+		"@sveltejs/adapter-cloudflare": "^9.0.0",
+		"@sveltejs/kit": "^3.4.0",
+		"@sveltejs/vite-plugin-svelte": "^7.3.1",
+		"svelte": "^5.59.1",
+		"svelte-check": "^4.7.8",
+		"typescript": "^6.0.3",
+		"vite": "^8.3.8",
+		"wrangler": "^4.166.0"
+	},
+	"dependencies": {
+		"maplibre-gl": "^5.24.1"
+	}
+}

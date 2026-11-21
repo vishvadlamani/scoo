@@ -1,0 +1,75 @@
+/* Scoo's tokens and base. Light by default; dark follows the system unless a page pins
+   data-theme. A page may add tokens of its own beside these. */
+:root {
+	--bg: #ffffff;
+	--ink: #111111;
+	--muted: #55595f;
+	--accent: #ff6b4a;
+	--soft: #ffd9cf;
+	--glow: #ffe7a3;
+	--leaf: #9ed3a8;
+	--line: #e7e5e0;
+	--green: #2e9e62;
+	--tile: #f6f4f0;
+	--card: #ffffff;
+	--tint: #fff6f3;
+	--font: 'Hanken Grotesk', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--bg: #0e0e10;
+		--ink: #ededed;
+		--muted: #a7abb3;
+		--accent: #ff7a5c;
+		--soft: #4a2620;
+		--glow: #5a4a1c;
+		--leaf: #2f5a3a;
+		--line: #2a2a2e;
+		--green: #4cc587;
+		--tile: #17171a;
+		--card: #141417;
+		--tint: #1a1412;
+	}
+}
+:root[data-theme='dark'] {
+	--bg: #0e0e10;
+	--ink: #ededed;
+	--muted: #a7abb3;
+	--accent: #ff7a5c;
+	--soft: #4a2620;
+	--glow: #5a4a1c;
+	--leaf: #2f5a3a;
+	--line: #2a2a2e;
+	--green: #4cc587;
+	--tile: #17171a;
+	--card: #141417;
+	--tint: #1a1412;
+}
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+html,
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--ink);
+	font-family: var(--font);
+}
+.vh {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation: none !important;
+		transition: none !important;
+	}
+}
