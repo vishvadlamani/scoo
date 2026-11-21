@@ -1,0 +1,8 @@
+<svg viewBox="0 0 320 220" aria-hidden="true" class="ill">
+<rect x="96" y="22" width="128" height="180" rx="12"/><rect x="134" y="12" width="52" height="22" rx="8" class="soft"/>
+<g class="row" style="--i:0"><rect x="116" y="56" width="20" height="20" rx="5"/><path class="tick" d="M120 66 l5 5 l9 -11"/><path d="M148 62 h56 M148 72 h36"/></g>
+<g class="row" style="--i:1"><rect x="116" y="96" width="20" height="20" rx="5"/><path class="tick" d="M120 106 l5 5 l9 -11"/><path d="M148 102 h56 M148 112 h28"/></g>
+<g class="row" style="--i:2"><rect x="116" y="136" width="20" height="20" rx="5"/><path d="M148 142 h56 M148 152 h40"/></g>
+<g class="pencil"><path class="soft" d="M236 168 l34 -60 l14 8 l-34 60 Z"/><path d="M236 168 l-4 18 l18 -10"/><path d="M266 116 l14 8"/></g>
+<path class="spark" d="M70 70 l-12 -6 M66 92 h-14 M240 40 l8 -10"/>
+</svg>

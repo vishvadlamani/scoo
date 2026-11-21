@@ -1,0 +1,14 @@
+<svg viewBox="0 0 360 270" aria-hidden="true" class="ill">
+<path d="M6 246 H354"/><path d="M6 258 H354" class="dash"/>
+<path class="paper" d="M14 246 V176 a10 10 0 0 1 10 -10 H118 l22 30 H156 a8 8 0 0 1 8 8 V246"/><path d="M118 166 v30 h38"/><rect x="30" y="180" width="56" height="26" rx="4" class="soft"/>
+<text x="58" y="223" text-anchor="middle" class="signtxt">RIVERA</text>
+<circle cx="50" cy="248" r="13" class="paper"/><circle cx="50" cy="248" r="5"/><circle cx="134" cy="248" r="13" class="paper"/><circle cx="134" cy="248" r="5"/>
+{plumber}
+<text x="196" y="142" text-anchor="middle" class="busy">busy on a job</text>
+<g class="phone"><rect x="252" y="20" width="96" height="176" rx="16" class="paper"/><path d="M286 30 h28"/>
+<g class="msg" style="--i:0"><rect x="262" y="44" width="70" height="30" rx="10" class="soft"/><text x="297" y="57" text-anchor="middle" class="t">My sink is</text><text x="297" y="68" text-anchor="middle" class="t">leaking!</text></g>
+<g class="msg" style="--i:1"><rect x="268" y="82" width="70" height="30" rx="10" class="paper"/><text x="303" y="95" text-anchor="middle" class="t">Rivera Plumbing,</text><text x="303" y="106" text-anchor="middle" class="t">how can I help?</text></g>
+<g class="msg" style="--i:2"><rect x="262" y="120" width="76" height="34" rx="10" class="accent"/><text x="300" y="134" text-anchor="middle" class="tw">Booked: today</text><text x="300" y="146" text-anchor="middle" class="tw">3pm ✓</text></g>
+<rect x="282" y="168" width="36" height="14" rx="7" class="accent"/></g>
+<path class="buzz" d="M240 70 q-8 16 0 32 M230 62 q-12 24 0 48"/>
+</svg>

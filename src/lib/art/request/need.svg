@@ -1,0 +1,6 @@
+<svg viewBox="0 0 320 220" aria-hidden="true" class="ill">
+<rect x="112" y="18" width="96" height="184" rx="18"/><path d="M146 30 h28"/><circle cx="160" cy="188" r="5"/>
+<g class="pop" style="--i:0"><path class="soft" d="M128 58 h64 a10 10 0 0 1 10 10 v18 a10 10 0 0 1 -10 10 h-40 l-12 10 v-10 h-12 a10 10 0 0 1 -10 -10 v-18 a10 10 0 0 1 10 -10 Z"/><path d="M134 74 h40 M134 84 h24"/></g>
+<g class="pop" style="--i:1"><path d="M136 108 h56 a10 10 0 0 1 10 10 v14 a10 10 0 0 1 -10 10 h-10 v10 l-12 -10 h-34 a10 10 0 0 1 -10 -10 v-14 a10 10 0 0 1 10 -10 Z"/><circle class="dot" cx="150" cy="125" r="3"/><circle class="dot" cx="162" cy="125" r="3" style="--i:1"/><circle class="dot" cx="174" cy="125" r="3" style="--i:2"/></g>
+<path class="spark" d="M236 52 l6 -10 M246 66 l12 -4 M232 40 l-2 -12"/><path class="spark" d="M84 150 l-10 6 M80 136 l-12 -2"/>
+</svg>

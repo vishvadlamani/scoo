@@ -1,0 +1,10 @@
+<svg viewBox="0 0 400 280" aria-hidden="true" class="ill">
+<g class="links"><path id="l1" d="M200 140 C150 120 120 80 76 70"/><path id="l2" d="M200 140 C250 120 280 80 324 70"/>
+<path id="l3" d="M200 140 C150 165 120 205 76 214"/><path id="l4" d="M200 140 C250 165 280 205 324 214"/></g>
+<circle r="5" class="dot"><animateMotion dur="2.4s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#l1"/></animateMotion></circle>
+<circle r="5" class="dot"><animateMotion dur="2.4s" begin="-0.6s" repeatCount="indefinite" calcMode="linear"><mpath href="#l2"/></animateMotion></circle>
+<circle r="5" class="dot"><animateMotion dur="2.4s" begin="-1.2s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#l3"/></animateMotion></circle>
+<circle r="5" class="dot"><animateMotion dur="2.4s" begin="-1.8s" repeatCount="indefinite" calcMode="linear"><mpath href="#l4"/></animateMotion></circle>
+<rect x="130" y="108" width="140" height="64" rx="18" class="paper"/><text x="200" y="135" text-anchor="middle" class="h">YOUR EXCHANGE</text><text x="200" y="155" text-anchor="middle" class="s">your rules · your fee</text>
+{plumber}{electrician}{lawyer}{insurance}
+</svg>
